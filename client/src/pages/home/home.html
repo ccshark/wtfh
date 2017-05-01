@@ -1,0 +1,17 @@
+<ion-header>
+ <ion-navbar color="secondary">
+  <ion-title>
+    Home
+  </ion-title>
+  <ion-buttons end>
+    <button ion-button (click)="addMarker()"><ion-icon name="add"></ion-icon>Add Marker</button>
+  </ion-buttons>
+  <ion-buttons start>
+    <button ion-button icon-only (click)="logout()"><ion-icon name="power"></ion-icon></button>
+  </ion-buttons>
+ </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <button ion-button block color="primary" (click)="createParty()" block>Create party</button>
+</ion-content>

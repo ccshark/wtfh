@@ -1,0 +1,6 @@
+#Connect to DB:
+mongo --port 27017 -u "gu" -p "gu" --authenticationDatabase "admin"
+
+
+start mongod:
+mongod --auth --port 27017
