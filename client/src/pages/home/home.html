@@ -14,4 +14,10 @@
 
 <ion-content>
   <button ion-button block color="primary" (click)="createParty()" block>Create party</button>
+  <br>
+
+  <ion-card>
+    <ion-title>Join a party</ion-title>
+    <button *ngFor="let party of parties" ion-button block color="light" (click)="joinParty(party)" block>{{party.name}}</button>
+  </ion-card>
 </ion-content>

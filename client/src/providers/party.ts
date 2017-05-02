@@ -10,14 +10,14 @@ export class Party {
 
   }
 
-  getTodos(){
+  getParties(){
 
     return new Promise((resolve, reject) => {
 
       let headers = new Headers();
       headers.append('Authorization', this.authService.token);
 
-      this.http.get('http://127.0.0.1:8080/api/todos', {headers: headers})
+      this.http.get('http://127.0.0.1:8080/api/party/get', {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
           resolve(data);

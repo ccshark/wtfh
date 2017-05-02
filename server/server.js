@@ -25,12 +25,11 @@ mongoose.connect(databaseConfig.url);
 }); */
 
 io.sockets.on('connection', function(connection) {
-    console.log("connected to room");
-    // once a client has connected, we expect to get a ping from them saying what room they want to join
-    connection.on('room', function(room) {
-        console.log("as joined room");
-        console.log(room);
+    console.log("connected to the socket");
+    connection.on('join', function(room) {
+        console.log("someone joined the room: " + room);
         connection.join(room);
+        io.sockets.in(room).emit('new-user', { message: 'new user joined the room' });
     });
 });
 

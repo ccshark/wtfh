@@ -14,7 +14,8 @@ export class GroupLobby {
   todos: any;
   loading: any;
   socket:any;
-  room:Number;
+  room:any;
+  roomName:String;
 
   @ViewChild('map') mapElement: ElementRef;
   map: any;
@@ -29,14 +30,17 @@ export class GroupLobby {
   }
 
   ionViewDidLoad(){
-    this.socket = io('http://localhost:8080');
-    this.room = this.navParams.get('id');
+    this.socket = io('http://localhost:8080').connect();
+    this.room = this.navParams.get('room');
+    this.roomName = this.room.name;
     console.log(this.room);
 
-    this.socket.on('connection', function(io) {
-      // Connected, let's sign-up for to receive messages for this room
-      //TODO: kommer inte längre
-      this.socket.emit('room', this.room);
+
+    this.socket.emit('join', this.room._id);
+
+
+    this.socket.on("new-user", function(data) {
+      console.log(data.message);
     });
 
     this.socket.on('message', function(data) {

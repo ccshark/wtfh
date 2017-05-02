@@ -26,7 +26,7 @@ module.exports = function(app){
     // Routes
     apiRoutes.use('/party', partyRoutes);
 
-    partyRoutes.get('/:category', requireAuth, AuthenticationController.roleAuthorization(['reader','creator','editor']), PartyController.getQuiz);
+    partyRoutes.get('/get', requireAuth, AuthenticationController.roleAuthorization(['reader','creator','editor']), PartyController.getParties);
     partyRoutes.get('/start', requireAuth, AuthenticationController.roleAuthorization(['reader','creator','editor']), PartyController.startQuiz);
     partyRoutes.post('/answare', requireAuth, AuthenticationController.roleAuthorization(['reader','creator','editor']), PartyController.answareQuiz);
     partyRoutes.post('/create', requireAuth, AuthenticationController.roleAuthorization(['creator','editor', 'reader']), PartyController.createParty);

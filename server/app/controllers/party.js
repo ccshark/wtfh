@@ -1,20 +1,13 @@
 var Party = require('../models/party');
 var request = require("request");
 
-exports.getQuiz = function(req, res, next){
-    var category = req.params.category;
-    request("https://opentdb.com/api.php?amount=1&category=" + category + "&difficulty=easy&type=multiple", function(error, response, body) {
-      console.log(JSON.parse(body).results[0]);
-      res.json(JSON.parse(body));
-    });
-    //TODO: Spara ner frågor i egen databas för att föra statistik
-    /*Quiz.find(function(err, quiz) {
+exports.getParties = function(req, res, next){
+    Party.find(function(err, data) {
         if (err){
             res.send(err);
         }
-        console.log(quiz);
-        res.json(quiz);
-    }); */
+        res.json(data);
+    });
 }
 
 exports.startQuiz = function(req, res, next){

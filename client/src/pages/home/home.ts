@@ -15,6 +15,7 @@ export class HomePage {
 
   todos: any;
   loading: any;
+  parties:any;
 
   constructor(public navCtrl: NavController,
               public todoService: Todos,
@@ -27,13 +28,11 @@ export class HomePage {
 
   ionViewDidLoad(){
     //this.loadMap();
-    /*this.todoService.getTodos().then((data) => {
-          //this.todos = data;
-          this.loadMap();
+    this.partyService.getParties().then((data) => {
+          this.parties = data;
     }, (err) => {
         console.log("not allowed");
-    }); */
-
+    });
   }
 
   createParty(){
@@ -66,13 +65,55 @@ export class HomePage {
                         this.loading.dismiss();
                         //TODO: connect to the party lobby
                         console.log(result)
-                        this.navCtrl.push(GroupLobby, {id : result[0]._id})
+                        this.navCtrl.push(GroupLobby, {room : result[0]})
                     }, (err) => {
                         this.loading.dismiss();
                         console.log("not allowed");
                     });
 
                 }
+          }
+        }
+      ]
+    });
+
+    prompt.present();
+
+  }
+
+  joinParty(party){
+    let prompt = this.alertCtrl.create({
+      title: 'Join ' + party.name,
+      message: '',
+      inputs: [
+        {
+          name: 'password',
+          placeholder: 'Password'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel'
+        },
+        {
+          text: 'Join',
+          handler: party => {
+            this.navCtrl.push(GroupLobby, {room : party})
+            /*if(party){
+
+              this.showLoader();
+
+              this.partyService.joinParty(party).then((result) => {
+                this.loading.dismiss();
+                //TODO: connect to the party lobby
+                console.log(result)
+                this.navCtrl.push(GroupLobby, {room : result[0]})
+              }, (err) => {
+                this.loading.dismiss();
+                console.log("not allowed");
+              });
+
+            } */
           }
         }
       ]
